@@ -77,7 +77,7 @@ drwxr-xr-x  8 kafka kafka 4096 Mar 16 08:30 confluent-6.1.0/
 
 ### optional: add env variables to your profile or bash_profile
 
-see [`kafka_env.profile`](kafka_env.profile)kafka_env.profile file for often used environment variables and aliases
+see [`kafka_env.profile`](./etc/kafka_env.profile)kafka_env.profile file for often used environment variables and aliases
 to ease the kafka administration 
 
 
