@@ -1,6 +1,7 @@
 # Kafka examples
 
 Some examples working with Kafka
+for an unordered list of examples have a look at [ examples](./examples)
 
 ## topic related stuff
 
