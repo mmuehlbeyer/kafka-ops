@@ -1,3 +1,0 @@
-##
-#several examples regarding kafka
-#quite unstructered 

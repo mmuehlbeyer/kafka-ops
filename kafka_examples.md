@@ -1,7 +1,8 @@
 # Kafka examples
 
-Some examples working with Kafka
-for an unordered list of examples have a look at [ examples](./examples)
+Some basic commands working with Kafka
+
+for additional examples have a look at [ code_snippets](./code_snippets)
 
 ## topic related stuff
 
@@ -32,12 +33,12 @@ _confluent_balancer_broker_samples
 
 ### produce some data 
 ```bash
-kafka-bash-producer --broker-list localhost:9092 --topic Test123
+kafka-console-producer --broker-list localhost:9092 --topic Test123
 ```
 
 ### consume the data
 ```bash
-kafka-bash-consumer --bootstrap-server localhost:9092 --topic Test123 --from-beginning
+kafka-console-consumer --bootstrap-server localhost:9092 --topic Test123 --from-beginning
 ```
 
 ### alter topics
