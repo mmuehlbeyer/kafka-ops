@@ -5,5 +5,6 @@ Mainly regarding OPS related things like setting up a cluster, basic commands, m
 
   * [ Dockerized Setup](readme_docker.md)
   * [ OnPrem Setup](readme_onprem.md)
+  * [ Kafka examples](kafka_examples.md)
 
 
