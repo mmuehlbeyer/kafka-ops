@@ -1,10 +1,10 @@
-# docker-based-setup
+# docker based setup
 the following will run a basic environment based on confluent platform 6 with the following components:
 
 * 1 Zookeeper
 * 1 Kafka Broker
 
-get docker-compose.yml from [`docker-compose.yml`](docker-compose.yml).
+get docker-compose.yml from [`docker-compose.yml`](docker-compose.yml)
 
 start docker compose
 ```
