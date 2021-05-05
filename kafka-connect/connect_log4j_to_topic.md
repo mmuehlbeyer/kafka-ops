@@ -34,6 +34,7 @@ jars are available for download
 * https://mvnrepository.com/artifact/io.confluent/confluent-log4j-extensions  
   
  <br/> 
+ 
 **adapt kafka connect-log4j.properties**  
 
 example config in connect-log4j.properties [`connect-log4j.properties`](connect-log4j.properties).
@@ -49,3 +50,6 @@ log4j.logger.processing=INFO, kafka_appender
 log4j.logger.org.apache.kafka.connect=INFO, kafka_appender
 log4j.additivity.org.apache.kafka.connect=false
 ```
+
+
+**Start Kafka Connect and check the topic for incoming messages :-)**
