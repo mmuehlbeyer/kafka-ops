@@ -1,0 +1,10 @@
+# Strimzi Kafka Minikube
+
+# start minikube
+minikube start --memory=4096
+
+# create namespace
+kubectl create namespace kafka
+
+# apply install files
+kubectl create -f 'https://strimzi.io/install/latest?namespace=kafka' -n kafka
