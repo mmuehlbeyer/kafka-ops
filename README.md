@@ -1,4 +1,4 @@
-# Kafka OPS related stuff
+# Kafka related stuff - mainly OPS and infrastructure focussed
 
 A collection of Kafka related stuff.
 Mainly regarding OPS related things like setting up a cluster, basic commands, monitoring and so on.
