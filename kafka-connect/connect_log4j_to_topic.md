@@ -34,10 +34,10 @@ jars are available for download
 * https://mvnrepository.com/artifact/io.confluent/confluent-log4j-extensions  
   
  <br/> 
- 
+
 **adapt kafka connect-log4j.properties**  
 
-example config in connect-log4j.properties [`connect-log4j.properties`](connect-log4j.properties).
+example config in [`connect-log4j.properties`](connect-log4j.properties).
 
 code snippet
 ```
