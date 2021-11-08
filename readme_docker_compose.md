@@ -1,4 +1,4 @@
-# docker based setup
+# docker compose  based setup
 the following will run a basic environment based on confluent platform 6 with the following components:
 
 * 1 Zookeeper
