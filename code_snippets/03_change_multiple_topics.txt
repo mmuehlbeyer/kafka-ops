@@ -1,0 +1,12 @@
+# small script to change settings of multiple topics
+# all topics with specific pattern (in this case 'a' will be changed
+#
+#
+# adapt the changed setting to your needs
+
+
+for a in $(kafka-topics --bootstrap-server localhost:9092 --list | grep '^a')
+do 
+#debug echo $a
+kafka-configs --bootstrap-server localhost:9092 --alter  --entity-name $a --entity-type topics --add-config retention.ms=5000
+done
