@@ -14,6 +14,7 @@ https://github.com/jitendra3109/ApacheKafka/blob/master/Docs/confluent-kafka-def
 ## Blogs
 https://rmoff.net/
 https://www.kai-waehner.de/blog/category/apache-kafka/
+https://blogs.apache.org/kafka/
 
 
 ## Misc
