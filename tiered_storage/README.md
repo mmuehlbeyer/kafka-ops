@@ -169,14 +169,5 @@ show some tiered storage usage.
 
 ![kafka tiered storge](kafka_ts_01.png)
 
-
-kes identity new --ip "127.0.0.1" localhost
-
-  Private key:  private.key
-  Certificate:  public.crt
-  Identity:     1bbb318caeaac7057f84f9a62d52687b6f471a90386f1be5719b9bc703d93ed0
-
-
-    Private key:  client.key
-  Certificate:  client.crt
-  Identity:     737587542e80898f186e0870ce923230694f9d7e320253fd8144d7d7c7ad46b1
+as well on the minio side some objects should appear
+![minio objects](kafka_ts_02.png)
