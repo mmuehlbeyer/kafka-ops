@@ -1,0 +1,43 @@
+global:
+  scrape_interval: 60s 
+  evaluation_interval: 15s
+  scrape_timeout: 30s
+
+# Alertmanager configuration
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+          # - alertmanager:9093
+#rule_files:
+ #  - "alert_rules.yml"
+
+# scrape prometheus itself
+scrape_configs:
+  - job_name: "prometheus"
+    static_configs:
+      - targets: ["localhost:9090"]
+
+  - job_name: "zookeeper"
+    static_configs:
+      - targets: 
+          - "localhost:9101"
+        labels:
+          env: "dev"
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: hostname
+        regex: '([^:]+)(:[0-9]+)?'
+        replacement: '${1}'
+
+  - job_name: "kafka"
+    static_configs:
+      - targets:
+          - "localhost:9102"
+        labels:
+          env: "dev"
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: hostname
+        regex: '([^:]+)(:[0-9]+)?'
+        replacement: '${1}'        
