@@ -11,7 +11,7 @@ rm confluent-community-7.2.0.tar.gz
 ln -s /app/confluent-7.2.0 /app/confluent
 ```
 
-#### jmx exporter part
+#### configure the jmx exporter part
 
 ```
 mkdir /app/confluent/share/monitoring
@@ -22,6 +22,8 @@ wget -O /app/confluent/share/monitoring/kafka_broker.yml https://raw.githubuserc
 ```
 
 #### start the kafka stack
+
+with basic config (not production ready)
 
 zookeeper
 ```
@@ -45,10 +47,15 @@ rm prometheus-2.38.0.linux-amd64.tar.gz
 ln -s /app/prometheus-2.38.0.linux-amd64 /app/prometheu
 ```
 
+
+get prometheus.yml
+
 ```
 cd /app/prometheus
-get prometheus.yml
-wget 
+
+wget https://raw.githubusercontent.com/mmuehlbeyer/kafka-ops/master/monitoring/prometheus.yml
+```
+
 
 start prometheus
 
