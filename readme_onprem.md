@@ -51,10 +51,10 @@ choose which edition you like to install
 
 ```console
 #Confluent Enterprise
-export conf_entp=http://packages.confluent.io/archive/6.1/confluent-6.1.0.tar.gz
+export conf_entp=http://packages.confluent.io/archive/7.2/confluent-7.2.2.tar.gz
 
 #Confluent Community
-export conf_comm=http://packages.confluent.io/archive/6.1/confluent-community-6.1.0.tar.gz
+export conf_comm=http://packages.confluent.io/archive/7.2/confluent-community-7.2.2.tar.gz
 
 cd /app
 
@@ -64,15 +64,15 @@ curl -O $conf_entp
 
 ### extract the software 
 ```console
-tar xvfz confluent-6.1.0.tar.gz
-ln -s confluent-6.1.0 confluent
+tar xvfz confluent-7.2.2.tar.gz
+ln -s confluent-7.2.2 confluent
 
-/app$ ll
+kafka@ubuntu01:/app$ ll
 total 12
-drwxr-xr-x  3 kafka kafka 4096 Mar 16 08:31 ./
-drwxr-xr-x 22 root  root  4096 Mar 16 07:54 ../
-lrwxrwxrwx  1 kafka kafka   15 Mar 16 08:30 confluent -> confluent-6.1.0/
-drwxr-xr-x  8 kafka kafka 4096 Mar 16 08:30 confluent-6.1.0/
+drwxr-xr-x  3 kafka kafka 4096 Oct  7 08:14 ./
+drwxr-xr-x 21 root  root  4096 Oct  7 07:17 ../
+lrwxrwxrwx  1 kafka kafka   15 Oct  7 08:13 confluent -> confluent-7.2.2/
+drwxr-xr-x  8 kafka kafka 4096 Sep 20 04:40 confluent-7.2.2/
 ```
 
 ### optional: add env variables to your profile or bash_profile
