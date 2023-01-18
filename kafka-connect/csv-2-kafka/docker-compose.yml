@@ -1,0 +1,100 @@
+---
+version: '3'
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    hostname: zookeeper
+    container_name: zookeeper
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+
+  broker:
+    image: confluentinc/cp-server:latest
+    container_name: broker
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+      - "9101:9101"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://broker:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_METRIC_REPORTERS: io.confluent.metrics.reporter.ConfluentMetricsReporter
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_CONFLUENT_LICENSE_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_CONFLUENT_BALANCER_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_JMX_PORT: 9101
+      KAFKA_JMX_HOSTNAME: localhost
+      CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: broker:29092
+      CONFLUENT_METRICS_REPORTER_TOPIC_REPLICAS: 1
+      CONFLUENT_METRICS_ENABLE: 'true'
+      CONFLUENT_SUPPORT_CUSTOMER_ID: 'anonymous'
+  
+  schema-registry:
+    image: "confluentinc/cp-schema-registry:latest"
+    container_name: schema-registry
+    ports:
+      - 8081:8081  
+    depends_on:
+      - zookeeper
+      - broker
+    volumes:
+      - ./scripts:/scripts    
+    environment:
+      SCHEMA_REGISTRY_HOST_NAME: schema-registry
+      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: 'PLAINTEXT://broker:29092'
+      SCHEMA_REGISTRY_AVRO_COMPATIBILITY_LEVEL: "none"
+      SCHEMA_REGISTRY_LOG4J_ROOT_LOGLEVEL: "WARN"
+
+  kafka-connect:
+      image: confluentinc/cp-kafka-connect:latest
+      container_name: kafka-connect
+      user: root
+      ports:
+        - 8083:8083
+      volumes:
+        - ./data:/data   
+      environment:
+        CONNECT_BOOTSTRAP_SERVERS: broker:29092
+        CONNECT_REST_PORT: 8083
+        CONNECT_REST_ADVERTISED_HOST_NAME: kafka-connect
+        CONNECT_GROUP_ID: kafka-connect-csv-kafka
+        CONNECT_CONFIG_STORAGE_TOPIC: _kafka-connect-csv-kafka-configs
+        CONNECT_OFFSET_STORAGE_TOPIC: _kafka-connect-csv-kafka-offsets
+        CONNECT_STATUS_STORAGE_TOPIC: _kafka-connect-csv-kafka-status
+        CONNECT_KEY_CONVERTER: io.confluent.connect.avro.AvroConverter
+        CONNECT_VALUE_CONVERTER: io.confluent.connect.avro.AvroConverter
+        CONNECT_PLUGIN_PATH: /usr/share/java,/usr/share/confluent-hub-components,/data/connect-jars
+        CONNECT_KEY_CONVERTER_SCHEMA_REGISTRY_URL: schema-registry:8081
+        CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL: schema-registry:8081
+        CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: 1
+        CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: 1
+        CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: 1
+
+      command:
+        - bash
+        - -c
+        - |
+          echo "Installing Kafka Confluent Connector"
+          confluent-hub install --no-prompt jcustenborder/kafka-connect-spooldir:2.0.65
+          echo "Launching Kafka Connect worker"
+          /etc/confluent/docker/run &
+          #
+          echo "Waiting for Kafka Connect to start listening on 0.0.0.0:8083 ⏳"
+          while : ; do
+            curl_status=$$(curl -s -o /dev/null -w %{http_code} http://0.0.0.0:8083/connectors)
+            echo -e $$(date) " Kafka Connect listener HTTP state: " $$curl_status " (waiting for 200)"
+            if [ $$curl_status -eq 200 ] ; then
+            break
+            fi
+            sleep 5
+          done
+          sleep infinity
