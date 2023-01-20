@@ -8,7 +8,7 @@ First of all clone this repo :-)
 
 ```bash
 docker-compose up -d 
-``
+```
 
 ### Create the connector 
 
@@ -25,4 +25,4 @@ curl -i -X PUT -H "Accept:application/json" \
         "schema.generation.enabled":"true",
         "csv.first.row.as.header":"true"
         }'
-```
+``
