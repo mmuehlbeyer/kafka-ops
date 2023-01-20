@@ -1,5 +1,3 @@
-#README
-
 Basic example for loading CSV to Kafka with Kafka Connect
 inspired by https://rmoff.net/2020/06/17/loading-csv-data-into-kafka/
 
@@ -8,8 +6,9 @@ First of all clone this repo :-)
 
 ### Startup the stack
 
+```bash
 docker-compose up -d 
-
+```
 
 ### Create the connector 
 
